@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"p1_createproject\startup_stm32f103xb.o"
+"p1_createproject\main.o"
+"p1_createproject\gpio.o"
+"p1_createproject\stm32f1xx_it.o"
+"p1_createproject\stm32f1xx_hal_msp.o"
+"p1_createproject\stm32f1xx_hal_gpio_ex.o"
+"p1_createproject\stm32f1xx_hal_tim.o"
+"p1_createproject\stm32f1xx_hal_tim_ex.o"
+"p1_createproject\stm32f1xx_hal.o"
+"p1_createproject\stm32f1xx_hal_rcc.o"
+"p1_createproject\stm32f1xx_hal_rcc_ex.o"
+"p1_createproject\stm32f1xx_hal_gpio.o"
+"p1_createproject\stm32f1xx_hal_dma.o"
+"p1_createproject\stm32f1xx_hal_cortex.o"
+"p1_createproject\stm32f1xx_hal_pwr.o"
+"p1_createproject\stm32f1xx_hal_flash.o"
+"p1_createproject\stm32f1xx_hal_flash_ex.o"
+"p1_createproject\stm32f1xx_hal_exti.o"
+"p1_createproject\system_stm32f1xx.o"
+--strict --scatter "P1_CreateProject\P1_CreateProject.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "P1_CreateProject.map" -o P1_CreateProject\P1_CreateProject.axf

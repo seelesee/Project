@@ -1,0 +1,41 @@
+# === Keil MDK-ARM 编译产物 ===
+*.uvguix.*
+*.lst
+*.obj
+*.d
+*.crf
+*.o
+*.axf
+*.dep
+*.iex
+*.htm
+*.plg
+*.build_log.htm
+JLinkLog.txt
+JLinkSettings.ini
+*.lnp
+*.map
+Listings/
+Objects/
+Output/
+DebugConfig/
+RTE/
+
+# === STM32CubeMX / IDE ===
+*.mxproject
+**/Drivers/CMSIS/
+**/Drivers/STM32F1xx_HAL_Driver/
+
+# === Proteus ===
+*.pdsprj.*.workspace
+Project Backups/
+
+# === 通用 ===
+*.hex
+*.bin
+*.tmp
+*.bak
+*.swp
+*~
+Thumbs.db
+Desktop.ini
