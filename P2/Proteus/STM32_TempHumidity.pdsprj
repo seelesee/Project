@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROTEUS version="8.0">
+  <HEADER>
+    <TITLE>STM32 智能温湿度监测系统</TITLE>
+    <SUBTITLE>DHT22 + SSD1306 OLED + 按键阀值设定 + 蜂鸣器报警 + 串口上传</SUBTITLE>
+    <DESIGNER>Claude</DESIGNER>
+    <DATE>2026-06-18</DATE>
+    <REVISION>1.0</REVISION>
+  </HEADER>
+
+  <!-- ==================== 元器件清单 ==================== -->
+  <COMPONENTS>
+    <!-- ===== 主控 MCU ===== -->
+    <COMPONENT>
+      <ID>U1</ID>
+      <VALUE>STM32F103C8</VALUE>
+      <LIBRARY>STM32F1xxx</LIBRARY>
+      <PACKAGE>LQFP48</PACKAGE>
+      <X>400</X><Y>300</Y>
+      <ROTATION>0</ROTATION>
+      <PROGRAMFILE>../MDK-ARM/STM32_TempHumidity/STM32_TempHumidity.hex</PROGRAMFILE>
+      <CLOCK>72000000</CLOCK>
+      <PINS>
+        PA0=DHT22_DATA
+        PA1=KEY_UP
+        PA2=KEY_DOWN
+        PA3=KEY_SET
+        PA4=BUZZER
+        PA9=UART1_TX
+        PA10=UART1_RX
+        PB6=OLED_SCL
+        PB7=OLED_SDA
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== DHT22 温湿度传感器 ===== -->
+    <COMPONENT>
+      <ID>U2</ID>
+      <VALUE>DHT22</VALUE>
+      <LIBRARY>ACTIVE</LIBRARY>
+      <PACKAGE>DIP4</PACKAGE>
+      <X>150</X><Y>300</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        VCC=+3.3V
+        DATA=PA0
+        NC=NC
+        GND=GND
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== 上拉电阻 (DHT22) ===== -->
+    <COMPONENT>
+      <ID>R1</ID>
+      <VALUE>4.7k</VALUE>
+      <LIBRARY>RES</LIBRARY>
+      <PACKAGE>AXIAL0.4</PACKAGE>
+      <X>200</X><Y>220</Y>
+      <ROTATION>90</ROTATION>
+      <PINS>
+        P1=PA0
+        P2=+3.3V
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== SSD1306 OLED 0.96寸 ===== -->
+    <COMPONENT>
+      <ID>U3</ID>
+      <VALUE>SSD1306</VALUE>
+      <LIBRARY>DISPLAY</LIBRARY>
+      <PACKAGE>DIP8</PACKAGE>
+      <X>700</X><Y>300</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        GND=GND
+        VCC=+3.3V
+        SCL=OLED_SCL
+        SDA=OLED_SDA
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== 按键 ×3 (上拉电阻内置) ===== -->
+    <COMPONENT>
+      <ID>SW1</ID>
+      <VALUE>BUTTON-UP</VALUE>
+      <LIBRARY>ACTIVE</LIBRARY>
+      <PACKAGE>SW-PB2</PACKAGE>
+      <X>100</X><Y>450</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=KEY_UP
+        P2=+3.3V
+      </PINS>
+    </COMPONENT>
+
+    <COMPONENT>
+      <ID>SW2</ID>
+      <VALUE>BUTTON-DOWN</VALUE>
+      <LIBRARY>ACTIVE</LIBRARY>
+      <PACKAGE>SW-PB2</PACKAGE>
+      <X>200</X><Y>450</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=KEY_DOWN
+        P2=+3.3V
+      </PINS>
+    </COMPONENT>
+
+    <COMPONENT>
+      <ID>SW3</ID>
+      <VALUE>BUTTON-SET</VALUE>
+      <LIBRARY>ACTIVE</LIBRARY>
+      <PACKAGE>SW-PB2</PACKAGE>
+      <X>300</X><Y>450</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=KEY_SET
+        P2=+3.3V
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== 按键下拉电阻 (10K) ===== -->
+    <COMPONENT>
+      <ID>R2</ID>
+      <VALUE>10k</VALUE>
+      <LIBRARY>RES</LIBRARY>
+      <PACKAGE>AXIAL0.4</PACKAGE>
+      <X>150</X><Y>520</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=KEY_UP
+        P2=GND
+      </PINS>
+    </COMPONENT>
+
+    <COMPONENT>
+      <ID>R3</ID>
+      <VALUE>10k</VALUE>
+      <LIBRARY>RES</LIBRARY>
+      <PACKAGE>AXIAL0.4</PACKAGE>
+      <X>250</X><Y>520</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=KEY_DOWN
+        P2=GND
+      </PINS>
+    </COMPONENT>
+
+    <COMPONENT>
+      <ID>R4</ID>
+      <VALUE>10k</VALUE>
+      <LIBRARY>RES</LIBRARY>
+      <PACKAGE>AXIAL0.4</PACKAGE>
+      <X>350</X><Y>520</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=KEY_SET
+        P2=GND
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== 蜂鸣器驱动电路 ===== -->
+    <COMPONENT>
+      <ID>Q1</ID>
+      <VALUE>S8050</VALUE>
+      <LIBRARY>ACTIVE</LIBRARY>
+      <PACKAGE>TO92</PACKAGE>
+      <X>150</X><Y>650</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        B=BUZZER
+        C=BUZZER_N
+        E=GND
+      </PINS>
+    </COMPONENT>
+
+    <COMPONENT>
+      <ID>R5</ID>
+      <VALUE>1k</VALUE>
+      <LIBRARY>RES</LIBRARY>
+      <PACKAGE>AXIAL0.4</PACKAGE>
+      <X>100</X><Y>600</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=BUZZER
+        P2=PA4
+      </PINS>
+    </COMPONENT>
+
+    <COMPONENT>
+      <ID>LS1</ID>
+      <VALUE>BUZZER</VALUE>
+      <LIBRARY>ACTIVE</LIBRARY>
+      <PACKAGE>SIP2</PACKAGE>
+      <X>200</X><Y>700</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        P1=+3.3V
+        P2=BUZZER_N
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== 串口虚拟终端 ===== -->
+    <COMPONENT>
+      <ID>VT1</ID>
+      <VALUE>VIRTUAL TERMINAL</VALUE>
+      <LIBRARY>ACTIVE</LIBRARY>
+      <PACKAGE>DEFAULT</PACKAGE>
+      <X>650</X><Y>100</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        RXD=UART1_TX
+        TXD=UART1_RX
+      </PINS>
+      <PROPERTIES>
+        <BAUD>115200</BAUD>
+        <DATABITS>8</DATABITS>
+        <PARITY>NONE</PARITY>
+        <STOPBITS>1</STOPBITS>
+      </PROPERTIES>
+    </COMPONENT>
+
+    <!-- ===== 逻辑分析仪 (监测串口帧) ===== -->
+    <COMPONENT>
+      <ID>LA1</ID>
+      <VALUE>LOGIC ANALYSER</VALUE>
+      <LIBRARY>INSTRUMENTS</LIBRARY>
+      <X>800</X><Y>100</Y>
+      <ROTATION>0</ROTATION>
+      <PINS>
+        A0=UART1_TX
+        A1=UART1_RX
+      </PINS>
+    </COMPONENT>
+
+    <!-- ===== 电源 ===== -->
+    <COMPONENT>
+      <ID>PWR1</ID>
+      <VALUE>+3.3V</VALUE>
+      <LIBRARY>POWER</LIBRARY>
+      <X>50</X><Y>50</Y>
+    </COMPONENT>
+
+    <COMPONENT>
+      <ID>GND1</ID>
+      <VALUE>GND</VALUE>
+      <LIBRARY>POWER</LIBRARY>
+      <X>50</X><Y>750</Y>
+    </COMPONENT>
+  </COMPONENTS>
+
+  <!-- ==================== 网络连接 ==================== -->
+  <NETS>
+    <NET NAME="+3.3V">
+      U1.VDD,U1.VDDA,U1.VBAT,U2.VCC,U3.VCC,SW1.P2,SW2.P2,SW3.P2,R1.P2,LS1.P1,PWR1
+    </NET>
+    <NET NAME="GND">
+      U1.VSS,U1.VSSA,U2.GND,U3.GND,R2.P2,R3.P2,R4.P2,Q1.E,GND1
+    </NET>
+    <NET NAME="PA0">
+      U1.PA0,U2.DATA,R1.P1
+    </NET>
+    <NET NAME="PA1">
+      U1.PA1,SW1.P1,R2.P1
+    </NET>
+    <NET NAME="PA2">
+      U1.PA2,SW2.P1,R3.P1
+    </NET>
+    <NET NAME="PA3">
+      U1.PA3,SW3.P1,R4.P1
+    </NET>
+    <NET NAME="PA4">
+      U1.PA4,R5.P2
+    </NET>
+    <NET NAME="BUZZER">
+      R5.P1,Q1.B
+    </NET>
+    <NET NAME="BUZZER_N">
+      LS1.P2,Q1.C
+    </NET>
+    <NET NAME="OLED_SCL">
+      U1.PB6,U3.SCL
+    </NET>
+    <NET NAME="OLED_SDA">
+      U1.PB7,U3.SDA
+    </NET>
+    <NET NAME="UART1_TX">
+      U1.PA9,VT1.RXD,LA1.A0
+    </NET>
+    <NET NAME="UART1_RX">
+      U1.PA10,VT1.TXD,LA1.A1
+    </NET>
+  </NETS>
+
+  <!-- ==================== 仿真设置 ==================== -->
+  <SIMULATION>
+    <CLOCK_FREQ>72000000</CLOCK_FREQ>
+    <SIM_SPEED>0</SIM_SPEED>          <!-- 0=尽可能快 -->
+    <VCC_VOLTAGE>3.3</VCC_VOLTAGE>
+    <ANIMATION_SPEED>50</ANIMATION_SPEED>
+  </SIMULATION>
+</PROTEUS>

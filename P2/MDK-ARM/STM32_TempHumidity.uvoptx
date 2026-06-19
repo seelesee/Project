@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectOpt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/arm-software/uVision/master/Schema/uvoptx.xsd">
+  <SchemaVersion>1.0</SchemaVersion>
+  <Header>### uVision 调试/选项配置</Header>
+
+  <!-- 目标配置 -->
+  <Target>
+    <TargetName>STM32_TempHumidity</TargetName>
+    <ToolsetNumber>0x4</ToolsetNumber>
+    <ToolsetName>ARM-ADS</ToolsetName>
+
+    <!-- 编译优化: -O1 (中等优化+调试信息) -->
+    <TargetOption>
+      <CLKADS>72000000</CLKADS>
+
+      <!-- 编译器控制 -->
+      <Cads>
+        <interw>1</interw>
+        <Optim>1</Optim>            <!-- -O1 -->
+        <oTime>0</oTime>
+        <SplitLS>0</SplitLS>
+        <OneElfS>0</OneElfS>
+        <Strict>0</Strict>
+        <EnumInt>0</EnumInt>
+        <PlainCh>0</PlainCh>
+        <Ropi>0</Ropi>
+        <Rwpi>0</Rwpi>
+        <wLevel>0</wLevel>         <!-- -w (suppress all warnings) -->
+        <uThumb>1</uThumb>
+        <uSurpInc>0</uSurpInc>
+        <VariousControls>
+          <MiscControls>--gnu</MiscControls>
+          <Define>USE_HAL_DRIVER,STM32F103xB</Define>
+          <Undefine />
+          <IncludePath>..;../Inc;../Drivers/CMSIS/Include;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/STM32F1xx_HAL_Driver/Inc</IncludePath>
+        </VariousControls>
+      </Cads>
+
+      <!-- 汇编器控制 -->
+      <Aads>
+        <interw>1</interw>
+        <Ropi>0</Ropi>
+        <Rwpi>0</Rwpi>
+        <thumb>1</thumb>
+        <SplitLS>0</SplitLS>
+        <VariousControls>
+          <Define>USE_HAL_DRIVER,STM32F103xB</Define>
+        </VariousControls>
+      </Aads>
+
+      <!-- 链接器控制 -->
+      <LDads>
+        <Ropi>0</Ropi>
+        <Rwpi>0</Rwpi>
+        <noStLib>0</noStLib>
+        <RepFail>0</RepFail>
+        <VariousControls>
+          <MiscControls>--diag_suppress=L6314</MiscControls>
+        </VariousControls>
+        <ScatterFile>.\STM32F103C8Tx_FLASH.sct</ScatterFile>
+      </LDads>
+
+      <!-- 调试配置 -->
+      <DebugOpt>
+        <uSim>
+          <UseSimulator>0</UseSimulator>
+          <LoadAppAtStartup>1</LoadAppAtStartup>
+          <RunToMain>1</RunToMain>
+          <RestoreBreakpoints>1</RestoreBreakpoints>
+        </uSim>
+        <uTarget>
+          <UseDebugDriver>1</UseDebugDriver>
+          <LoadAppAtStartup>1</LoadAppAtStartup>
+          <RunToMain>1</RunToMain>
+          <RestoreBreakpoints>1</RestoreBreakpoints>
+          <DriverOptions>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F1xx_128 -FS080000000 -FL010000 -FP0($$Device:STM32F103C8$Flash\STM32F103C8.FLM))</DriverOptions>
+        </uTarget>
+      </DebugOpt>
+    </TargetOption>
+
+    <!-- 文件属性 -->
+    <Groups>
+      <Group>
+        <GroupName>Application/User</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>Drivers/Sensor</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>Drivers/Display</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>Drivers/Button</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>Drivers/Buzzer</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>Drivers/Protocol</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>Drivers/Config</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>CMSIS</GroupName>
+        <tvExp>1</tvExp>
+      </Group>
+      <Group>
+        <GroupName>HAL_Driver</GroupName>
+        <tvExp>0</tvExp>
+      </Group>
+    </Groups>
+  </Target>
+</ProjectOpt>

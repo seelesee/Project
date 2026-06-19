@@ -1,0 +1,155 @@
+# ============================================================
+# STM32CubeMX Project Configuration
+# MCU: STM32F103C8Tx
+# Project: 智能温湿度监测系统
+# Date:    2026-06-18
+# ============================================================
+
+# ===== MCU 选型 =====
+Mcu.Name=STM32F103C8Tx
+Mcu.Package=LQFP48
+Mcu.UserName=STM32F103C8Tx
+
+# ===== CubeMX 版本信息 =====
+ProjectManager.Version=6.11.0
+ProjectManager.FirmwarePackage=STM32Cube FW_F1 V1.8.5
+
+# ===== 工程设置 =====
+ProjectManager.ProjectName=STM32_TempHumidity
+ProjectManager.ProjectLocation=./
+ProjectManager.TargetToolchain=MDK-ARM V5
+ProjectManager.TargetToolchainVersion=5.38
+ProjectManager.HeapSize=0x200
+ProjectManager.StackSize=0x400
+ProjectManager.PreviousToolchain=
+
+# ===== 代码生成选项 =====
+ProjectManager.CodeGen.StaticPeriphInit=false
+ProjectManager.CodeGen.EnableSwv=false
+ProjectManager.CodeGen.EnableWWDG=false
+ProjectManager.CodeGen.DeletePreviouslyGeneratedFiles=true
+ProjectManager.CodeGen.KeepUserCode=true
+ProjectManager.CodeGen.IPDefaultDir=Core
+ProjectManager.CodeGen.GenerateUnderRoot=true
+ProjectManager.CodeGen.HALFDOptimization=true
+
+# ===== 引脚下配置 =====
+# PA0  - DHT22 DATA (GPIO Output/Input 切换)
+PA0.GPIOSpeed=GPIO_SPEED_FREQ_HIGH
+PA0.GPIO_ModeDefaultOutput=GPIO_MODE_OUTPUT_OD
+PA0.Locked=true
+PA0.Signal=GPIO_Output
+
+# PA1  - KEY_UP (GPIO Input, Pull-down)
+PA1.GPIOSpeed=GPIO_SPEED_FREQ_LOW
+PA1.GPIO_ModeDefaultInput=GPIO_MODE_INPUT
+PA1.GPIOPuPd=GPIO_PULLDOWN
+PA1.Locked=true
+PA1.Signal=GPIO_Input
+
+# PA2  - KEY_DOWN (GPIO Input, Pull-down)
+PA2.GPIOSpeed=GPIO_SPEED_FREQ_LOW
+PA2.GPIO_ModeDefaultInput=GPIO_MODE_INPUT
+PA2.GPIOPuPd=GPIO_PULLDOWN
+PA2.Locked=true
+PA2.Signal=GPIO_Input
+
+# PA3  - KEY_SET (GPIO Input, Pull-down)
+PA3.GPIOSpeed=GPIO_SPEED_FREQ_LOW
+PA3.GPIO_ModeDefaultInput=GPIO_MODE_INPUT
+PA3.GPIOPuPd=GPIO_PULLDOWN
+PA3.Locked=true
+PA3.Signal=GPIO_Input
+
+# PA4  - BUZZER (GPIO Output, Push-Pull)
+PA4.GPIOSpeed=GPIO_SPEED_FREQ_LOW
+PA4.GPIO_ModeDefaultOutput=GPIO_MODE_OUTPUT_PP
+PA4.GPIOPuPd=GPIO_NOPULL
+PA4.Locked=true
+PA4.Signal=GPIO_Output
+
+# PA9  - USART1_TX (Alternate Function Push-Pull)
+PA9.GPIOSpeed=GPIO_SPEED_FREQ_HIGH
+PA9.GPIO_ModeDefaultOutput=GPIO_MODE_AF_PP
+PA9.Locked=true
+PA9.Signal=USART1_TX
+
+# PA10 - USART1_RX (Input floating)
+PA10.GPIOSpeed=GPIO_SPEED_FREQ_HIGH
+PA10.GPIO_ModeDefaultInput=GPIO_MODE_INPUT
+PA10.GPIOPuPd=GPIO_NOPULL
+PA10.Locked=true
+PA10.Signal=USART1_RX
+
+# PA13 - SWDIO (保留, 调试接口)
+PA13.GPIOSpeed=GPIO_SPEED_FREQ_HIGH
+PA13.Mode=Serial_Wire
+PA13.Signal=SYS_JTMS-SWDIO
+
+# PA14 - SWCLK (保留, 调试接口)
+PA14.GPIOSpeed=GPIO_SPEED_FREQ_HIGH
+PA14.Mode=Serial_Wire
+PA14.Signal=SYS_JTCK-SWCLK
+
+# PB6  - OLED_SCL (GPIO Output, Push-Pull - 软件I2C)
+PB6.GPIOSpeed=GPIO_SPEED_FREQ_HIGH
+PB6.GPIO_ModeDefaultOutput=GPIO_MODE_OUTPUT_PP
+PB6.GPIOPuPd=GPIO_PULLUP
+PB6.Locked=true
+PB6.Signal=GPIO_Output
+
+# PB7  - OLED_SDA (GPIO Output, Push-Pull - 软件I2C)
+PB7.GPIOSpeed=GPIO_SPEED_FREQ_HIGH
+PB7.GPIO_ModeDefaultOutput=GPIO_MODE_OUTPUT_PP
+PB7.GPIOPuPd=GPIO_PULLUP
+PB7.Locked=true
+PB7.Signal=GPIO_Output
+
+# ===== SYS 调试接口 =====
+SYS.SYS_Debug=Serial_Wire
+
+# ===== 时钟配置 =====
+# HSE: 8MHz 外部晶振
+# PLL: HSE × 9 = 72MHz
+# SYSCLK = 72MHz
+# AHB = 72MHz
+# APB1 = 36MHz
+# APB2 = 72MHz
+RCC.HSE_VALUE=8000000
+RCC.HSI_VALUE=8000000
+RCC.LSE_VALUE=32768
+RCC.LSI_VALUE=40000
+RCC.HSE_ENABLED=true
+RCC.HSI_ENABLED=false
+RCC.LSE_ENABLED=false
+RCC.LSI_ENABLED=false
+RCC.PLL_Source=RCC_PLLSOURCE_HSE
+RCC.PLL_MUL=RCC_PLL_MUL9
+RCC.SYSCLKSource=RCC_SYSCLKSOURCE_PLLCLK
+RCC.AHBCLKDivider=RCC_SYSCLK_DIV1
+RCC.APB1CLKDivider=RCC_HCLK_DIV2
+RCC.APB2CLKDivider=RCC_HCLK_DIV1
+RCC.FlashLatency=FLASH_LATENCY_2
+
+# ===== USART1 配置 =====
+USART1.Mode=UART_ASYNC
+USART1.BaudRate=115200
+USART1.WordLength=UART_WORDLENGTH_8B
+USART1.Parity=UART_PARITY_NONE
+USART1.StopBits=UART_STOPBITS_1
+USART1.OverSampling=UART_OVERSAMPLING_16
+USART1.Direction=UART_DIRECTION_TX_RX
+
+# ===== NVIC 中断配置 =====
+NVIC.USART1_IRQn=true\:0\:0\:false\:false\:true\:false\:true
+NVIC.SysTick_IRQn=true\:0\:0\:false\:false\:true\:false\:true
+NVIC.TimeBase=TIM1
+NVIC.TimeBaseIRQ=TIM1_UP_IRQn
+NVIC.PriorityGroup=NVIC_PRIORITYGROUP_4
+
+# ===== 引脚列表总结 =====
+PinOutPanel.RotationAngle=0
+ProjectManager.CustomerFirmwarePackage=GeneralProject
+VP_SYS_VS_Systick.Signal=SYS_VS_Systick
+VP_TIM1_VS_ClockSourceINT.Mode=Enable_Timer
+VP_TIM1_VS_ClockSourceINT.Signal=TIM1_VS_ClockSourceINT

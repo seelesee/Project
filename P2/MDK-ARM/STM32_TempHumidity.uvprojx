@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/arm-software/uVision/master/Schema/uvprojx.xsd">
+  <SchemaVersion>2.1</SchemaVersion>
+  <Header>### 智能温湿度监测系统 - Keil uVision5 Project</Header>
+
+  <!-- ==================== 目标芯片 ==================== -->
+  <Targets>
+    <Target>
+      <TargetName>STM32_TempHumidity</TargetName>
+      <ToolsetNumber>0x4</ToolsetNumber>
+      <ToolsetName>ARM-ADS</ToolsetName>
+      <TargetOption>
+        <TargetCommonOption>
+          <Device>STM32F103C8</Device>
+          <Vendor>STMicroelectronics</Vendor>
+          <PackID>Keil.STM32F1xx_DFP.2.4.1</PackID>
+          <Cpu>IRAM(0x20000000,0x5000) IROM(0x08000000,0x10000) CPUTYPE("Cortex-M3") CLOCK(72000000)</Cpu>
+          <FlashUtilSpec />
+          <StartupFile>"startup_stm32f103xb.s" ("STM32F103xB Startup Code")</StartupFile>
+
+          <!-- ROM/RAM 布局 -->
+          <TargetDriver>
+            <Option Name="JTAG|SW|SWD|SRAM" />
+          </TargetDriver>
+
+          <!-- 编译器/汇编器/链接器设置 -->
+          <CpuDllOptions>
+            <CpuDllEntry>
+              <Name>SARMCM3</Name>
+              <Parameters />
+            </CpuDllEntry>
+          </CpuDllOptions>
+          <DebugDllOptions>
+            <CpuDllEntry>
+              <Name>TARMCM1</Name>
+              <Parameters />
+            </CpuDllEntry>
+          </DebugDllOptions>
+        </TargetCommonOption>
+
+        <!-- ==================== 编译器设置 ==================== -->
+        <Cads>
+          <VariousControls>
+            <MiscControls />
+            <Define>USE_HAL_DRIVER,STM32F103xB</Define>
+            <Undefine />
+            <IncludePath>..;../Inc;../Drivers/CMSIS/Include;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/STM32F1xx_HAL_Driver/Inc;../Core/Inc</IncludePath>
+          </VariousControls>
+        </Cads>
+
+        <!-- ==================== 汇编器设置 ==================== -->
+        <Aads>
+          <VariousControls>
+            <MiscControls />
+            <Define>USE_HAL_DRIVER,STM32F103xB</Define>
+            <Undefine />
+            <IncludePath />
+          </VariousControls>
+        </Aads>
+
+        <!-- ==================== 链接器设置 ==================== -->
+        <LDads>
+          <VariousControls>
+            <MiscControls>--diag_suppress=L6314</MiscControls>
+            <Define />
+            <Undefine />
+          </VariousControls>
+          <ScatterFile>.\STM32F103C8Tx_FLASH.sct</ScatterFile>
+        </LDads>
+
+        <!-- ==================== 调试设置 ==================== -->
+        <DebugOpt>
+          <uSim>
+            <SetupMode>0</SetupMode>
+          </uSim>
+          <uTarget>
+            <UseDebugDriver>1</UseDebugDriver>
+            <DebugDriverDllName>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F1xx_128 -FS080000000 -FL010000 -FP0($$Device:STM32F103C8$Flash\STM32F103C8.FLM))</DebugDriverDllName>
+            <UseSimulator>0</UseSimulator>
+          </uTarget>
+        </DebugOpt>
+      </TargetOption>
+      <Groups>
+
+        <!-- ===== 应用层源码 ===== -->
+        <Group>
+          <GroupName>Application/User</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\main.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== 传感器驱动 ===== -->
+        <Group>
+          <GroupName>Drivers/Sensor</GroupName>
+          <Files>
+            <File>
+              <FileName>dht22.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\dht22.c</FilePath>
+            </File>
+            <File>
+              <FileName>dht22.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Inc\dht22.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== OLED 显示驱动 ===== -->
+        <Group>
+          <GroupName>Drivers/Display</GroupName>
+          <Files>
+            <File>
+              <FileName>oled.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\oled.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Inc\oled.h</FilePath>
+            </File>
+            <File>
+              <FileName>oled_font.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Inc\oled_font.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== 按键驱动 ===== -->
+        <Group>
+          <GroupName>Drivers/Button</GroupName>
+          <Files>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Inc\button.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== 蜂鸣器驱动 ===== -->
+        <Group>
+          <GroupName>Drivers/Buzzer</GroupName>
+          <Files>
+            <File>
+              <FileName>buzzer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\buzzer.c</FilePath>
+            </File>
+            <File>
+              <FileName>buzzer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Inc\buzzer.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== 协议模块 ===== -->
+        <Group>
+          <GroupName>Drivers/Protocol</GroupName>
+          <Files>
+            <File>
+              <FileName>protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>protocol.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Inc\protocol.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== 配置存储 ===== -->
+        <Group>
+          <GroupName>Drivers/Config</GroupName>
+          <Files>
+            <File>
+              <FileName>config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\config.c</FilePath>
+            </File>
+            <File>
+              <FileName>config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Inc\config.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== CMSIS ===== -->
+        <Group>
+          <GroupName>CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>system_stm32f1xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32f103xb.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>../Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/arm/startup_stm32f103xb.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+        <!-- ===== HAL 库 ===== -->
+        <Group>
+          <GroupName>HAL_Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32f1xx_hal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_cortex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_flash_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+
+      </Groups>
+    </Target>
+  </Targets>
+</Project>
