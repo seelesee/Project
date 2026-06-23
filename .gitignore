@@ -30,6 +30,9 @@ RTE/
 *.pdsprj.*.workspace
 Project Backups/
 
+# === 单元测试 ===
+**/tests/test_runner.exe
+
 # === 通用 ===
 *.hex
 *.bin
